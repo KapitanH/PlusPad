@@ -6,7 +6,7 @@ Please use StyleCop to maintain coding standards.
 Please install XNA 4.0 Framework for development.
 Please install XNA 4.0 Redistributable for use.
 
-This program was used mainly for use with Minecraft.
+This program was created mainly for use with Minecraft.
 These functions are currently hard coded:
 
 Left Stick: WASD  
