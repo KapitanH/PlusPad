@@ -1,10 +1,10 @@
 # PlusPad
 Simulates keyboard and mouse input with a XBOX 360 gamepad.
 
-Please use StyleCop to maintain coding standards.
+Please install XNA 4.0 Framework for development, and use StyleCop to maintain coding standards.  
 
-Please install XNA 4.0 Framework for development.
-Please install XNA 4.0 Redistributable for use.
+Download [+pad 1.0.0.0](https://github.com/KapitanH/PlusPad/blob/master/PlusPad/bin/Release/1.0.0.0/%2Bpad.exe).  
+Please install XNA 4.0 Redistributable beforehand.
 
 This program was created mainly for use with Minecraft.
 These functions are currently hard coded:
