@@ -229,80 +229,53 @@ namespace PlusPad
             // A Key by negative Left ThumbStick X
             if (gamePadState.ThumbSticks.Left.X < -ThumbStickThreshold && previousGamePadState.ThumbSticks.Left.X >= -ThumbStickThreshold)
             {
-                Win32.keybd_event((byte)this.LeftStickLeft.KeyCode.Code, (byte)this.LeftStickLeft.KeyCode.Code, 0, 0);
+                PressKey(Win32.ScanCodeShort.KEY_A, Win32.VirtualKeyShort.KEY_A);
             }
             else if (previousGamePadState.ThumbSticks.Left.X < -ThumbStickThreshold && gamePadState.ThumbSticks.Left.X >= -ThumbStickThreshold)
             {
-                Win32.keybd_event((byte)this.LeftStickLeft.KeyCode.Code, (byte)this.LeftStickLeft.KeyCode.Code, Win32.KeyEventfKeyUp, 0);
+                ReleaseKey(Win32.ScanCodeShort.KEY_A, Win32.VirtualKeyShort.KEY_A);
             }
 
             // D Key by positive Left ThumbStick X
             if (gamePadState.ThumbSticks.Left.X > ThumbStickThreshold && previousGamePadState.ThumbSticks.Left.X <= ThumbStickThreshold)
             {
-                Win32.keybd_event((byte)this.LeftStickRight.KeyCode.Code, (byte)this.LeftStickRight.KeyCode.Code, 0, 0);
+                PressKey(Win32.ScanCodeShort.KEY_D, Win32.VirtualKeyShort.KEY_D);
             }
             else if (previousGamePadState.ThumbSticks.Left.X > ThumbStickThreshold && gamePadState.ThumbSticks.Left.X <= ThumbStickThreshold)
             {
-                Win32.keybd_event((byte)this.LeftStickRight.KeyCode.Code, (byte)this.LeftStickRight.KeyCode.Code, Win32.KeyEventfKeyUp, 0);
+                ReleaseKey(Win32.ScanCodeShort.KEY_D, Win32.VirtualKeyShort.KEY_D);
             }
 
             // S Key by negative Left ThumbStick Y
             if (gamePadState.ThumbSticks.Left.Y < -ThumbStickThreshold && previousGamePadState.ThumbSticks.Left.Y >= -ThumbStickThreshold)
             {
-                Win32.keybd_event((byte)this.LeftStickDown.KeyCode.Code, (byte)this.LeftStickDown.KeyCode.Code, 0, 0);
+                PressKey(Win32.ScanCodeShort.KEY_S, Win32.VirtualKeyShort.KEY_S);
             }
             else if (previousGamePadState.ThumbSticks.Left.Y < -ThumbStickThreshold && gamePadState.ThumbSticks.Left.Y >= -ThumbStickThreshold)
             {
-                Win32.keybd_event((byte)this.LeftStickDown.KeyCode.Code, (byte)this.LeftStickDown.KeyCode.Code, Win32.KeyEventfKeyUp, 0);
+                ReleaseKey(Win32.ScanCodeShort.KEY_S, Win32.VirtualKeyShort.KEY_S);
             }
 
             // W Key by positive Left ThumbStick Y
             if (gamePadState.ThumbSticks.Left.Y > ThumbStickThreshold && previousGamePadState.ThumbSticks.Left.Y <= ThumbStickThreshold)
             {
-                Win32.keybd_event((byte)this.LeftStickUp.KeyCode.Code, (byte)this.LeftStickUp.KeyCode.Code, 0, 0);
+                PressKey(Win32.ScanCodeShort.KEY_W, Win32.VirtualKeyShort.KEY_W);
             }
             else if (previousGamePadState.ThumbSticks.Left.Y > ThumbStickThreshold && gamePadState.ThumbSticks.Left.Y <= ThumbStickThreshold)
             {
-                Win32.keybd_event((byte)this.LeftStickUp.KeyCode.Code, (byte)this.LeftStickUp.KeyCode.Code, Win32.KeyEventfKeyUp, 0);
+                ReleaseKey(Win32.ScanCodeShort.KEY_W, Win32.VirtualKeyShort.KEY_W);
             }
 
             // Space Key by A Button
             if (gamePadState.Buttons.A == Microsoft.Xna.Framework.Input.ButtonState.Pressed
                 && previousGamePadState.Buttons.A == Microsoft.Xna.Framework.Input.ButtonState.Released)
             {
-                var keybInput = new Win32.KEYBDINPUT();
-                keybInput.wScan = Win32.ScanCodeShort.SPACE;
-                keybInput.wVk = Win32.VirtualKeyShort.SPACE;
-
-                var inputunion = new Win32.InputUnion();
-                inputunion.ki = keybInput;
-
-                var input = new Win32.INPUT();
-                input.type = 1;
-                input.U = inputunion;
-
-                Win32.INPUT[] inputs = { input };
-
-                Win32.SendInput((uint)inputs.Length, inputs, Win32.INPUT.Size);
+                PressKey(Win32.ScanCodeShort.SPACE, Win32.VirtualKeyShort.SPACE);
             }
             else if (previousGamePadState.Buttons.A == Microsoft.Xna.Framework.Input.ButtonState.Pressed
                 && gamePadState.Buttons.A == Microsoft.Xna.Framework.Input.ButtonState.Released)
             {
-                var keybInput = new Win32.KEYBDINPUT();
-                keybInput.wScan = Win32.ScanCodeShort.SPACE;
-                keybInput.wVk = Win32.VirtualKeyShort.SPACE;
-                keybInput.dwFlags = Win32.KEYEVENTF.KEYUP;
-
-                var inputunion = new Win32.InputUnion();
-                inputunion.ki = keybInput;
-
-                var input = new Win32.INPUT();
-                input.type = 1;
-                input.U = inputunion;
-
-                Win32.INPUT[] inputs = { input };
-
-                Win32.SendInput((uint)inputs.Length, inputs, Win32.INPUT.Size);
+                ReleaseKey(Win32.ScanCodeShort.SPACE, Win32.VirtualKeyShort.SPACE);
             }
         }
 
@@ -574,6 +547,43 @@ namespace PlusPad
                                         keyCodes.FirstOrDefault(code => code.Name == "."),
                                         keyCodes.FirstOrDefault(code => code.Name == "SPACE")
                                     };
+        }
+
+        void PressKey(Win32.ScanCodeShort scanCode, Win32.VirtualKeyShort virtualKey)
+        {
+            var keybInput = new Win32.KEYBDINPUT();
+            keybInput.wScan = scanCode;
+            keybInput.wVk = virtualKey;
+
+            var inputunion = new Win32.InputUnion();
+            inputunion.ki = keybInput;
+
+            var input = new Win32.INPUT();
+            input.type = 1;
+            input.U = inputunion;
+
+            Win32.INPUT[] inputs = { input };
+
+            Win32.SendInput((uint)inputs.Length, inputs, Win32.INPUT.Size);
+        }
+
+        void ReleaseKey(Win32.ScanCodeShort scanCode, Win32.VirtualKeyShort virtualKey)
+        {
+            var keybInput = new Win32.KEYBDINPUT();
+            keybInput.wScan = scanCode;
+            keybInput.wVk = virtualKey;
+            keybInput.dwFlags = Win32.KEYEVENTF.KEYUP;
+
+            var inputunion = new Win32.InputUnion();
+            inputunion.ki = keybInput;
+
+            var input = new Win32.INPUT();
+            input.type = 1;
+            input.U = inputunion;
+
+            Win32.INPUT[] inputs = { input };
+
+            Win32.SendInput((uint)inputs.Length, inputs, Win32.INPUT.Size);
         }
     }
 }
