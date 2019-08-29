@@ -270,12 +270,39 @@ namespace PlusPad
             if (gamePadState.Buttons.A == Microsoft.Xna.Framework.Input.ButtonState.Pressed
                 && previousGamePadState.Buttons.A == Microsoft.Xna.Framework.Input.ButtonState.Released)
             {
-                Win32.keybd_event((byte)this.A.KeyCode.Code, (byte)this.A.KeyCode.Code, 0, 0);
+                var keybInput = new Win32.KEYBDINPUT();
+                keybInput.wScan = Win32.ScanCodeShort.SPACE;
+                keybInput.wVk = Win32.VirtualKeyShort.SPACE;
+
+                var inputunion = new Win32.InputUnion();
+                inputunion.ki = keybInput;
+
+                var input = new Win32.INPUT();
+                input.type = 1;
+                input.U = inputunion;
+
+                Win32.INPUT[] inputs = { input };
+
+                Win32.SendInput((uint)inputs.Length, inputs, Win32.INPUT.Size);
             }
             else if (previousGamePadState.Buttons.A == Microsoft.Xna.Framework.Input.ButtonState.Pressed
                 && gamePadState.Buttons.A == Microsoft.Xna.Framework.Input.ButtonState.Released)
             {
-                Win32.keybd_event((byte)this.A.KeyCode.Code, (byte)this.A.KeyCode.Code, Win32.KeyEventfKeyUp, 0);
+                var keybInput = new Win32.KEYBDINPUT();
+                keybInput.wScan = Win32.ScanCodeShort.SPACE;
+                keybInput.wVk = Win32.VirtualKeyShort.SPACE;
+                keybInput.dwFlags = Win32.KEYEVENTF.KEYUP;
+
+                var inputunion = new Win32.InputUnion();
+                inputunion.ki = keybInput;
+
+                var input = new Win32.INPUT();
+                input.type = 1;
+                input.U = inputunion;
+
+                Win32.INPUT[] inputs = { input };
+
+                Win32.SendInput((uint)inputs.Length, inputs, Win32.INPUT.Size);
             }
         }
 
