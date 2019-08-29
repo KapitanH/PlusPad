@@ -1,13 +1,12 @@
 # PlusPad
 Simulates keyboard and mouse input with a XBOX 360 gamepad.
 
-Download [+pad](https://github.com/KapitanH/PlusPad/archive/master.zip).  
-Please extract and run the compiled version from the subfolder \bin\Release\1.0.0.0.
+Please use StyleCop to maintain coding standards.
 
-For development please install [MonoGame 3.7.1](http://www.monogame.net/downloads/), and use [StyleCop](https://stylecop.codeplex.com/) to maintain coding standards.  
+Please install XNA 4.0 Framework for development.
+Please install XNA 4.0 Redistributable for use.
 
-This program was created mainly for use with Minecraft, but feel free to modify and improve.
-
+This program was created mainly for use with Minecraft.
 These functions are currently hard coded:
 
 Left Stick: WASD  
@@ -29,3 +28,5 @@ DPad up: Text input - next character
 DPad down: Text input - previous character  
 DPad left: Backspace  
 DPad right: Text input - accept character  
+
+Feel free to download, modify, and improve.
