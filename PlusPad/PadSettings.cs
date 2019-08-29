@@ -290,8 +290,8 @@ namespace PlusPad
             if (gamePadState.Buttons.B == Microsoft.Xna.Framework.Input.ButtonState.Pressed
                 && previousGamePadState.Buttons.B == Microsoft.Xna.Framework.Input.ButtonState.Released)
             {
-                Win32.keybd_event((byte)this.B.KeyCode.Code, (byte)this.B.KeyCode.Code, 0, 0);
-                Win32.keybd_event((byte)this.B.KeyCode.Code, (byte)this.B.KeyCode.Code, Win32.KeyEventfKeyUp, 0);
+                PressKey(Win32.ScanCodeShort.KEY_Q, Win32.VirtualKeyShort.KEY_Q);
+                ReleaseKey(Win32.ScanCodeShort.KEY_Q, Win32.VirtualKeyShort.KEY_Q);
             }
 
             // Y
