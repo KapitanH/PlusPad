@@ -305,16 +305,16 @@ namespace PlusPad
                 this.rightStickClicked = false;
             }
 
-            // L3
+            // LCTRL by L3
             if (gamePadState.Buttons.LeftStick == Microsoft.Xna.Framework.Input.ButtonState.Pressed
                 && previousGamePadState.Buttons.LeftStick == Microsoft.Xna.Framework.Input.ButtonState.Released)
             {
-                Win32.keybd_event((byte)this.L3.KeyCode.Code, (byte)this.L3.KeyCode.Code, 0, 0);
+                PressKey(Win32.ScanCodeShort.LCONTROL, Win32.VirtualKeyShort.LCONTROL);
             }
             else if (gamePadState.Buttons.LeftStick == Microsoft.Xna.Framework.Input.ButtonState.Released
                 && previousGamePadState.Buttons.LeftStick == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
             {
-                Win32.keybd_event((byte)this.L3.KeyCode.Code, (byte)this.L3.KeyCode.Code, Win32.KeyEventfKeyUp, 0);
+                ReleaseKey(Win32.ScanCodeShort.LCONTROL, Win32.VirtualKeyShort.LCONTROL);
             }
 
             // R3
