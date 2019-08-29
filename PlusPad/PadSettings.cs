@@ -286,7 +286,7 @@ namespace PlusPad
         /// <param name="previousGamePadState">The previous gamepad state.</param>
         public void PerformAction(GamePadState gamePadState, GamePadState previousGamePadState)
         {
-            // B
+            // Q by B
             if (gamePadState.Buttons.B == Microsoft.Xna.Framework.Input.ButtonState.Pressed
                 && previousGamePadState.Buttons.B == Microsoft.Xna.Framework.Input.ButtonState.Released)
             {
@@ -294,14 +294,15 @@ namespace PlusPad
                 ReleaseKey(Win32.ScanCodeShort.KEY_Q, Win32.VirtualKeyShort.KEY_Q);
             }
 
-            // Y
+            // E by Y
             if (gamePadState.Buttons.Y == Microsoft.Xna.Framework.Input.ButtonState.Pressed
                 && previousGamePadState.Buttons.Y == Microsoft.Xna.Framework.Input.ButtonState.Released)
             {
-                Win32.keybd_event((byte)this.Y.KeyCode.Code, (byte)this.Y.KeyCode.Code, 0, 0);
-                Win32.keybd_event((byte)this.Y.KeyCode.Code, (byte)this.Y.KeyCode.Code, Win32.KeyEventfKeyUp, 0);
+                PressKey(Win32.ScanCodeShort.KEY_E, Win32.VirtualKeyShort.KEY_E);
+                ReleaseKey(Win32.ScanCodeShort.KEY_E, Win32.VirtualKeyShort.KEY_E);
 
-                Win32.keybd_event((byte)this.R3.KeyCode.Code, (byte)this.R3.KeyCode.Code, Win32.KeyEventfKeyUp, 0);
+                ReleaseKey(Win32.ScanCodeShort.LSHIFT, Win32.VirtualKeyShort.LSHIFT);
+
                 this.rightStickClicked = false;
             }
 
