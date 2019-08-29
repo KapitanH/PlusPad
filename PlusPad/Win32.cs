@@ -1261,5 +1261,12 @@ namespace PlusPad
             internal short wParamL;
             internal short wParamH;
         }
+
+        public enum InputTypes
+        {
+            INPUT_MOUSE = 0,
+            INPUT_KEYBOARD = 1,
+            INPUT_HARDWARE = 2
+        }
     }
 }

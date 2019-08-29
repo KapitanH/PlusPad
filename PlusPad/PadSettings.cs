@@ -413,6 +413,8 @@ namespace PlusPad
 
             Cursor.Position = new System.Drawing.Point(Cursor.Position.X + (int)this.mousePosition.X, Cursor.Position.Y - (int)this.mousePosition.Y);
 
+            MoveMouse();
+
             if (oldX != Cursor.Position.X)
             {
                 this.mousePosition.X = 0;
@@ -559,7 +561,7 @@ namespace PlusPad
             inputunion.ki = keybInput;
 
             var input = new Win32.INPUT();
-            input.type = 1;
+            input.type = (uint)Win32.InputTypes.INPUT_KEYBOARD; 
             input.U = inputunion;
 
             Win32.INPUT[] inputs = { input };
@@ -578,7 +580,26 @@ namespace PlusPad
             inputunion.ki = keybInput;
 
             var input = new Win32.INPUT();
-            input.type = 1;
+            input.type = (uint)Win32.InputTypes.INPUT_KEYBOARD;
+            input.U = inputunion;
+
+            Win32.INPUT[] inputs = { input };
+
+            Win32.SendInput((uint)inputs.Length, inputs, Win32.INPUT.Size);
+        }
+
+        void MoveMouse()
+        {
+            var mouseInput = new Win32.MOUSEINPUT();
+            mouseInput.dx = (int)mousePosition.X;
+            mouseInput.dy = -(int)mousePosition.Y;
+            mouseInput.dwFlags = Win32.MOUSEEVENTF.MOVE;
+
+            var inputunion = new Win32.InputUnion();
+            inputunion.mi = mouseInput;
+
+            var input = new Win32.INPUT();
+            input.type = (uint)Win32.InputTypes.INPUT_MOUSE;
             input.U = inputunion;
 
             Win32.INPUT[] inputs = { input };
