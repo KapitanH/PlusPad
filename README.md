@@ -1,7 +1,7 @@
 # PlusPad
 Simulates keyboard and mouse input with a XBOX 360 gamepad.
 
-Download [+pad](https://github.com/KapitanH/PlusPad/raw/master/PlusPad/bin/Release/1.0.0.0/%2Bpad.exe).  
+Download [+pad](https://github.com/KapitanH/PlusPad/raw/1.0.0.0/PlusPad/bin/Release/1.0.0.0/%2Bpad.exe).  
 Please install XNA 4.0 Redistributable beforehand.
 
 For development please install XNA 4.0 Framework, and use StyleCop to maintain coding standards.  
