@@ -102,17 +102,14 @@ namespace PlusPad
                     {
                         padSettings.PressKey(Win32.ScanCodeShort.ESCAPE, Win32.VirtualKeyShort.ESCAPE);
                         padSettings.ReleaseKey(Win32.ScanCodeShort.ESCAPE, Win32.VirtualKeyShort.ESCAPE);
-
-                        //Win32.keybd_event((byte)this.padSettings.Start.KeyCode.Code, (byte)this.padSettings.Start.KeyCode.Code, 0, 0);
-                        //Win32.keybd_event((byte)this.padSettings.Start.KeyCode.Code, (byte)this.padSettings.Start.KeyCode.Code, Win32.KeyEventfKeyUp, 0);
                     }
 
-                    // Back Button
+                    // F3 by Back Button
                     if (gamePadState.Buttons.Back == Microsoft.Xna.Framework.Input.ButtonState.Pressed
                         && this.previousGamePadState.Buttons.Back == Microsoft.Xna.Framework.Input.ButtonState.Released)
                     {
-                        Win32.keybd_event((byte)this.padSettings.Back.KeyCode.Code, (byte)this.padSettings.Back.KeyCode.Code, 0, 0);
-                        Win32.keybd_event((byte)this.padSettings.Back.KeyCode.Code, (byte)this.padSettings.Back.KeyCode.Code, Win32.KeyEventfKeyUp, 0);
+                        padSettings.PressKey(Win32.ScanCodeShort.F3, Win32.VirtualKeyShort.F3);
+                        padSettings.ReleaseKey(Win32.ScanCodeShort.F3, Win32.VirtualKeyShort.F3);
                     }
 
                     // X Button
