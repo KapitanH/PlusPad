@@ -334,12 +334,12 @@ namespace PlusPad
                 }
             }
 
-            // D-Pad left
+            // Backspace by D-Pad left
             if (gamePadState.DPad.Left == Microsoft.Xna.Framework.Input.ButtonState.Pressed
                 && previousGamePadState.DPad.Left == Microsoft.Xna.Framework.Input.ButtonState.Released)
             {
-                Win32.keybd_event((byte)this.DPadLeft.KeyCode.Code, (byte)this.DPadLeft.KeyCode.Code, 0, 0);
-                Win32.keybd_event((byte)this.DPadLeft.KeyCode.Code, (byte)this.DPadLeft.KeyCode.Code, Win32.KeyEventfKeyUp, 0);
+                PressKey(Win32.ScanCodeShort.BACK, Win32.VirtualKeyShort.BACK);
+                ReleaseKey(Win32.ScanCodeShort.BACK, Win32.VirtualKeyShort.BACK);
 
                 this.ResetKeys();
             }
