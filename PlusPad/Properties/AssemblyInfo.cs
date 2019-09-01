@@ -1,17 +1,12 @@
-﻿// <copyright company="KapitanH" file="AssemblyInfo.cs">
-// (C) 2015 KapitanH
-// </copyright>
-
-using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("+pad")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("KapitanH")]
-[assembly: AssemblyProduct("ControllerInput")]
-[assembly: AssemblyCopyright("Copyright © 2019")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("+pad")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

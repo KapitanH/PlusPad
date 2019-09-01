@@ -1,8 +1,4 @@
-﻿// <copyright company="KapitanH" file="PadSettings.cs">
-// (C) 2015 KapitanH 
-// </copyright>
-
-namespace PlusPad
+﻿namespace PlusPad
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -11,46 +7,21 @@ namespace PlusPad
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;
 
-    /// <summary>
-    /// The gamepad settings.
-    /// </summary>
     [DataContract]
     public class PadSettings
     {
-        /// <summary>
-        /// The mouse speed.
-        /// </summary>
         private const float MouseSpeed = 3f;
 
-        /// <summary>
-        /// The dead zone area.
-        /// </summary>
         private const float ThumbStickThreshold = 0.35f;
 
-        /// <summary>
-        /// The current position in the list of keys.
-        /// </summary>
         private int keyIndex;
 
-        /// <summary>
-        /// Confirms the input of a key.
-        /// </summary>
         private bool nextKeyModifier;
 
-        /// <summary>
-        /// The mouse position.
-        /// </summary>
         private Vector2 mousePosition;
 
-        /// <summary>
-        /// Defines the pressed state of the right analogue stick.
-        /// </summary>
         private bool rightStickClicked = false;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PadSettings"/> class.
-        /// </summary>
-        /// <param name="keyCodes">The key codes the settings are loaded with.</param>
         public PadSettings(List<KeyCode> keyCodes)
         {
             this.InitializePadKeyCodes(keyCodes);
@@ -59,171 +30,88 @@ namespace PlusPad
             this.mousePosition = Vector2.Zero;
         }
 
-        /// <summary>
-        /// Gets or sets the key codes used for text input. 
-        /// </summary>
         public List<KeyCode> TextKeyCodes { get; set; }
 
         #region Buttons
-        /// <summary>
-        /// Gets or sets button L3.
-        /// </summary>
         [DataMember]
         public PadSettingsButton L3 { get; set; }
 
-        /// <summary>
-        /// Gets or sets button R3.
-        /// </summary>
         [DataMember]
         public PadSettingsButton R3 { get; set; }
 
-        /// <summary>
-        /// Gets or sets button X. 
-        /// </summary>
         [DataMember]
         public PadSettingsButton X { get; set; }
 
-        /// <summary>
-        /// Gets or sets button Y. 
-        /// </summary>
         [DataMember]
         public PadSettingsButton Y { get; set; }
 
-        /// <summary>
-        /// Gets or sets button A. 
-        /// </summary>
         [DataMember]
         public PadSettingsButton A { get; set; }
 
-        /// <summary>
-        /// Gets or sets button B. 
-        /// </summary>
         [DataMember]
         public PadSettingsButton B { get; set; }
 
-        /// <summary>
-        /// Gets or sets button Back.
-        /// </summary>
         [DataMember]
         public PadSettingsButton Back { get; set; }
 
-        /// <summary>
-        /// Gets or sets button Start.
-        /// </summary>
         [DataMember]
         public PadSettingsButton Start { get; set; }
 
-        /// <summary>
-        /// Gets or sets button LB. 
-        /// </summary>
         [DataMember]
         public PadSettingsButton LB { get; set; }
 
-        /// <summary>
-        /// Gets or sets button RB. 
-        /// </summary>
         [DataMember]
         public PadSettingsButton RB { get; set; }
 
-        /// <summary>
-        /// Gets or sets button LT. 
-        /// </summary>
         [DataMember]
         public PadSettingsButton LT { get; set; }
 
-        /// <summary>
-        /// Gets or sets button RT. 
-        /// </summary>
         [DataMember]
         public PadSettingsButton RT { get; set; }
 
-        /// <summary>
-        /// Gets or sets button D-Pad up.
-        /// </summary>
         [DataMember]
         public PadSettingsButton DPadUp { get; set; }
 
-        /// <summary>
-        /// Gets or sets button D-Pad down.
-        /// </summary>
         [DataMember]
         public PadSettingsButton DPadDown { get; set; }
 
-        /// <summary>
-        /// Gets or sets button D-Pad left.
-        /// </summary>
         [DataMember]
         public PadSettingsButton DPadLeft { get; set; }
 
-        /// <summary>
-        /// Gets or sets button D-Pad right.
-        /// </summary>
         [DataMember]
         public PadSettingsButton DPadRight { get; set; }
 
-        /// <summary>
-        /// Gets or sets left stick up. 
-        /// </summary>
         [DataMember]
         public PadSettingsButton LeftStickUp { get; set; }
 
-        /// <summary>
-        /// Gets or sets left stick up. 
-        /// </summary>
         [DataMember]
         public PadSettingsButton LeftStickDown { get; set; }
 
-        /// <summary>
-        /// Gets or sets left stick left.
-        /// </summary>
         [DataMember]
         public PadSettingsButton LeftStickLeft { get; set; }
 
-        /// <summary>
-        /// Gets or sets left stick right.
-        /// </summary>
         [DataMember]
         public PadSettingsButton LeftStickRight { get; set; }
 
-        /// <summary>
-        /// Gets or sets right stick up.
-        /// </summary>
         [DataMember]
         public PadSettingsButton RightStickUp { get; set; }
 
-        /// <summary>
-        /// Gets or sets right stick up.
-        /// </summary>
         [DataMember]
         public PadSettingsButton RightStickDown { get; set; }
 
-        /// <summary>
-        /// Gets or sets right stick left.
-        /// </summary>
         [DataMember]
         public PadSettingsButton RightStickLeft { get; set; }
 
-        /// <summary>
-        /// Gets or sets right stick right.
-        /// </summary>
         [DataMember]
         public PadSettingsButton RightStickRight { get; set; }
         #endregion
 
-        /// <summary>
-        /// Resets the access parameters for the list of keys.
-        /// </summary>
         public void ResetKeys()
         {
             this.nextKeyModifier = true;
             this.keyIndex = 0;
         }
-
-        /// <summary>
-        /// Processes Movement.
-        /// </summary>
-        /// <param name="gamePadState">The current gamepad state.</param>
-        /// <param name="previousGamePadState">The previous gamepad state.</param>
+                
         public void PerformMove(GamePadState gamePadState, GamePadState previousGamePadState)
         {
             // A Key by negative Left ThumbStick X
@@ -279,11 +167,6 @@ namespace PlusPad
             }
         }
 
-        /// <summary>
-        /// Processes actions.
-        /// </summary>
-        /// <param name="gamePadState">The current gamepad state.</param>
-        /// <param name="previousGamePadState">The previous gamepad state.</param>
         public void PerformAction(GamePadState gamePadState, GamePadState previousGamePadState)
         {
             // Q by B
@@ -396,10 +279,6 @@ namespace PlusPad
             }
         }
 
-        /// <summary>
-        /// Processes mouse movement.
-        /// </summary>
-        /// <param name="gamePadState">The current gamepad state.</param>
         public void PerformLook(GamePadState gamePadState)
         {
             // Mouse position by right ThumbStick
@@ -427,11 +306,6 @@ namespace PlusPad
             }
         }
 
-        /// <summary>
-        /// Processes mouse actions.
-        /// </summary>
-        /// <param name="gamePadState">The current gamepad state.</param>
-        /// <param name="previousGamePadState">The previous gamepad state.</param>
         public void PerformMouseAction(GamePadState gamePadState, GamePadState previousGamePadState)
         {
             // Mouse 1 by RT
@@ -470,10 +344,6 @@ namespace PlusPad
             }
         }
 
-        /// <summary>
-        /// Initializes the pad buttons used for triggering the keys.
-        /// </summary>
-        /// <param name="keyCodes">The list of all key codes.</param>
         private void InitializePadKeyCodes(List<KeyCode> keyCodes)
         {
             this.L3 = new PadSettingsButton(keyCodes.FirstOrDefault(code => code.Name == "LCTRL"));
@@ -502,10 +372,6 @@ namespace PlusPad
             this.RightStickRight = new PadSettingsButton(keyCodes.FirstOrDefault(code => code.Name == "Mouse +X"));
         }
 
-        /// <summary>
-        /// Initializes the key codes used for text input.
-        /// </summary>
-        /// <param name="keyCodes">The list of all key codes.</param>
         private void InitializeTextKeyCodes(List<KeyCode> keyCodes)
         {
             this.TextKeyCodes = new List<KeyCode>

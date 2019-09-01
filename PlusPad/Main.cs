@@ -1,8 +1,4 @@
-﻿// <copyright company="KapitanH" file="Main.cs">
-// (C) 2015 KapitanH 
-// </copyright>
-
-namespace PlusPad
+﻿namespace PlusPad
 {
     using System;
     using System.Collections.Generic;
@@ -12,49 +8,23 @@ namespace PlusPad
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;
 
-    /// <summary>
-    /// The main form.
-    /// </summary>
     public partial class Main : Form
     {
-        /// <summary>
-        /// All key codes.
-        /// </summary>
         private readonly List<KeyCode> allKeyCodes = new List<KeyCode>();
 
-        /// <summary>
-        /// The gamepad settings.
-        /// </summary>
         private PadSettings padSettings;
 
-        /// <summary>
-        /// The worker for the main loop.
-        /// </summary>
         private BackgroundWorker worker;
 
-        /// <summary>
-        /// The gamepad state since last loop iteration.
-        /// </summary>
         private GamePadState previousGamePadState;
 
-        /// <summary>
-        /// Defines, if the pad buttons are checked or not.
-        /// </summary>
         private bool isOn;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Main"/> class. 
-        /// </summary>
         public Main()
         {
             this.InitializeComponent();
         }
 
-        /// <summary>
-        /// Loads the main form and initializes mouse, keyboard, and background worker.
-        /// </summary>
-        /// <param name="sender">The calling object.</param>
-        /// <param name="e">The calling parameters.</param>
         private void Main_Load(object sender, EventArgs e)
         {
             this.InitializeAllKeyCodes();
@@ -69,11 +39,6 @@ namespace PlusPad
             this.isOn = true;
         }
 
-        /// <summary>
-        /// Processes user input on a different thread.
-        /// </summary>
-        /// <param name="sender">The calling object.</param>
-        /// <param name="e">The calling parameters.</param>
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             while (true)
@@ -135,9 +100,6 @@ namespace PlusPad
             }
         }
 
-        /// <summary>
-        /// Fills the list of keys.
-        /// </summary>
         private void InitializeAllKeyCodes()
         {
             this.allKeyCodes.Add(new KeyCode(Win32.KA, "A", 0));
