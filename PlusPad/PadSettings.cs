@@ -434,7 +434,7 @@ namespace PlusPad
         /// <param name="previousGamePadState">The previous gamepad state.</param>
         public void PerformMouseAction(GamePadState gamePadState, GamePadState previousGamePadState)
         {
-            // RT
+            // Mouse 1 by RT
             if (gamePadState.Triggers.Right > 0f && previousGamePadState.Triggers.Right <= 0f)
             {
                 Win32.mouse_event((byte)this.RT.KeyCode.Code, Cursor.Position.X, Cursor.Position.Y, 0, 0);
@@ -445,7 +445,7 @@ namespace PlusPad
                 this.ResetKeys();
             }
 
-            // LT
+            // Mouse 2 by LT
             if (gamePadState.Triggers.Left > 0f && previousGamePadState.Triggers.Left <= 0f)
             {
                 Win32.mouse_event((byte)this.LT.KeyCode.Code, Cursor.Position.X, Cursor.Position.Y, 0, 0);
@@ -455,14 +455,14 @@ namespace PlusPad
                 Win32.mouse_event(this.LT.KeyCodeUp, Cursor.Position.X, Cursor.Position.Y, 0, 0);
             }
 
-            // LB
+            // Mouse Wheel Up by LB
             if (gamePadState.Buttons.LeftShoulder == Microsoft.Xna.Framework.Input.ButtonState.Pressed
                 && previousGamePadState.Buttons.LeftShoulder == Microsoft.Xna.Framework.Input.ButtonState.Released)
             {
                 Win32.mouse_event((uint)this.LB.KeyCode.Code, Cursor.Position.X, Cursor.Position.Y, this.LB.KeyCode.Param, 0);
             }
 
-            // RB
+            // Mouse Wheel Down by RB
             if (gamePadState.Buttons.RightShoulder == Microsoft.Xna.Framework.Input.ButtonState.Pressed
                 && previousGamePadState.Buttons.RightShoulder == Microsoft.Xna.Framework.Input.ButtonState.Released)
             {
@@ -552,7 +552,7 @@ namespace PlusPad
                                     };
         }
 
-        void PressKey(Win32.ScanCodeShort scanCode, Win32.VirtualKeyShort virtualKey)
+        internal void PressKey(Win32.ScanCodeShort scanCode, Win32.VirtualKeyShort virtualKey)
         {
             var keybInput = new Win32.KEYBDINPUT();
             keybInput.wScan = scanCode;
@@ -570,7 +570,7 @@ namespace PlusPad
             Win32.SendInput((uint)inputs.Length, inputs, Win32.INPUT.Size);
         }
 
-        void ReleaseKey(Win32.ScanCodeShort scanCode, Win32.VirtualKeyShort virtualKey)
+        internal void ReleaseKey(Win32.ScanCodeShort scanCode, Win32.VirtualKeyShort virtualKey)
         {
             var keybInput = new Win32.KEYBDINPUT();
             keybInput.wScan = scanCode;
@@ -589,7 +589,7 @@ namespace PlusPad
             Win32.SendInput((uint)inputs.Length, inputs, Win32.INPUT.Size);
         }
 
-        void MoveMouse()
+        internal void MoveMouse()
         {
             var mouseInput = new Win32.MOUSEINPUT();
             mouseInput.dx = (int)mousePosition.X;

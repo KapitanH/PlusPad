@@ -96,12 +96,15 @@ namespace PlusPad
 
                 if (this.isOn)
                 { 
-                    // Start Button
+                    // ESCAPE by Start Button
                     if (gamePadState.Buttons.Start == Microsoft.Xna.Framework.Input.ButtonState.Pressed
                         && this.previousGamePadState.Buttons.Start == Microsoft.Xna.Framework.Input.ButtonState.Released)
                     {
-                        Win32.keybd_event((byte)this.padSettings.Start.KeyCode.Code, (byte)this.padSettings.Start.KeyCode.Code, 0, 0);
-                        Win32.keybd_event((byte)this.padSettings.Start.KeyCode.Code, (byte)this.padSettings.Start.KeyCode.Code, Win32.KeyEventfKeyUp, 0);
+                        padSettings.PressKey(Win32.ScanCodeShort.ESCAPE, Win32.VirtualKeyShort.ESCAPE);
+                        padSettings.ReleaseKey(Win32.ScanCodeShort.ESCAPE, Win32.VirtualKeyShort.ESCAPE);
+
+                        //Win32.keybd_event((byte)this.padSettings.Start.KeyCode.Code, (byte)this.padSettings.Start.KeyCode.Code, 0, 0);
+                        //Win32.keybd_event((byte)this.padSettings.Start.KeyCode.Code, (byte)this.padSettings.Start.KeyCode.Code, Win32.KeyEventfKeyUp, 0);
                     }
 
                     // Back Button
