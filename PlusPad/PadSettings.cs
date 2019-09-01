@@ -459,14 +459,14 @@ namespace PlusPad
             if (gamePadState.Buttons.LeftShoulder == Microsoft.Xna.Framework.Input.ButtonState.Pressed
                 && previousGamePadState.Buttons.LeftShoulder == Microsoft.Xna.Framework.Input.ButtonState.Released)
             {
-                Win32.mouse_event((uint)this.LB.KeyCode.Code, Cursor.Position.X, Cursor.Position.Y, this.LB.KeyCode.Param, 0);
+                MouseWheel(true);
             }
 
             // Mouse Wheel Down by RB
             if (gamePadState.Buttons.RightShoulder == Microsoft.Xna.Framework.Input.ButtonState.Pressed
                 && previousGamePadState.Buttons.RightShoulder == Microsoft.Xna.Framework.Input.ButtonState.Released)
             {
-                Win32.mouse_event((uint)this.RB.KeyCode.Code, Cursor.Position.X, Cursor.Position.Y, this.RB.KeyCode.Param, 0);
+                MouseWheel(false);
             }
         }
 
@@ -595,6 +595,28 @@ namespace PlusPad
             mouseInput.dx = (int)mousePosition.X;
             mouseInput.dy = -(int)mousePosition.Y;
             mouseInput.dwFlags = Win32.MOUSEEVENTF.MOVE;
+
+            var inputunion = new Win32.InputUnion();
+            inputunion.mi = mouseInput;
+
+            var input = new Win32.INPUT();
+            input.type = (uint)Win32.InputTypes.INPUT_MOUSE;
+            input.U = inputunion;
+
+            Win32.INPUT[] inputs = { input };
+
+            Win32.SendInput((uint)inputs.Length, inputs, Win32.INPUT.Size);
+        }
+
+        internal void MouseWheel(bool up)
+        {
+            var mouseInput = new Win32.MOUSEINPUT();
+            mouseInput.dwFlags = Win32.MOUSEEVENTF.WHEEL;
+
+            if(up)
+                mouseInput.mouseData = 120;
+            else
+                mouseInput.mouseData = -120;
 
             var inputunion = new Win32.InputUnion();
             inputunion.mi = mouseInput;
