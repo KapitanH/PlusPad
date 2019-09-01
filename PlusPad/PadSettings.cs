@@ -363,8 +363,8 @@ namespace PlusPad
                         this.keyIndex = 0;
                     }
 
-                    Win32.keybd_event(Win32.VKBACK, Win32.VKBACK, 0, 0);
-                    Win32.keybd_event(Win32.VKBACK, Win32.VKBACK, Win32.KeyEventfKeyUp, 0);
+                    PressKey(Win32.ScanCodeShort.BACK, Win32.VirtualKeyShort.BACK);
+                    ReleaseKey(Win32.ScanCodeShort.BACK, Win32.VirtualKeyShort.BACK);
                 }
 
                 Win32.keybd_event((byte)this.TextKeyCodes[this.keyIndex].Code, (byte)this.TextKeyCodes[this.keyIndex].Code, 0, 0);
@@ -385,8 +385,8 @@ namespace PlusPad
 
                 if (!this.nextKeyModifier)
                 {
-                    Win32.keybd_event(Win32.VKBACK, Win32.VKBACK, 0, 0);
-                    Win32.keybd_event(Win32.VKBACK, Win32.VKBACK, Win32.KeyEventfKeyUp, 0);
+                    PressKey(Win32.ScanCodeShort.BACK, Win32.VirtualKeyShort.BACK);
+                    ReleaseKey(Win32.ScanCodeShort.BACK, Win32.VirtualKeyShort.BACK);
                 }
 
                 Win32.keybd_event((byte)this.TextKeyCodes[this.keyIndex].Code, (byte)this.TextKeyCodes[this.keyIndex].Code, 0, 0);
