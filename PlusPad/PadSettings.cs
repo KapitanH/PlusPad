@@ -1,6 +1,7 @@
 ﻿namespace PlusPad
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Runtime.Serialization;
     using System.Windows.Forms;
@@ -10,7 +11,7 @@
     [DataContract]
     public class PadSettings
     {
-        private const float MouseSpeed = 3f;
+        private const float MouseSpeed = 1.65f;
 
         private const float ThumbStickThreshold = 0.35f;
 
@@ -31,6 +32,8 @@
         }
 
         public List<KeyCode> TextKeyCodes { get; set; }
+
+        Stopwatch sw = new Stopwatch();
 
         #region Buttons
         [DataMember]
@@ -281,14 +284,17 @@
 
         public void PerformLook(GamePadState gamePadState)
         {
+            float elapsed = (float)sw.Elapsed.TotalMilliseconds;
+            sw.Restart();
+
             // Mouse position by right ThumbStick
             int oldX = Cursor.Position.X;
             int oldY = Cursor.Position.Y;
 
             if (gamePadState.ThumbSticks.Right.X != 0 || gamePadState.ThumbSticks.Right.Y != 0)
             {
-                this.mousePosition.X += gamePadState.ThumbSticks.Right.X * MouseSpeed;
-                this.mousePosition.Y += gamePadState.ThumbSticks.Right.Y * MouseSpeed;
+                this.mousePosition.X += gamePadState.ThumbSticks.Right.X * MouseSpeed * elapsed;
+                this.mousePosition.Y += gamePadState.ThumbSticks.Right.Y * MouseSpeed * elapsed;
             }
 
             Cursor.Position = new System.Drawing.Point(Cursor.Position.X + (int)this.mousePosition.X, Cursor.Position.Y - (int)this.mousePosition.Y);
