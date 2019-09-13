@@ -27,6 +27,8 @@
 
         private void Main_Load(object sender, EventArgs e)
         {
+            this.Text = this.Text + " (" + Application.ProductVersion + ")";
+
             this.InitializeAllKeyCodes();
             
             this.padSettings = new PadSettings(this.allKeyCodes);
