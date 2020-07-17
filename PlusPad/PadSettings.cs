@@ -317,22 +317,22 @@
             // Mouse 1 by RT
             if (gamePadState.Triggers.Right > 0f && previousGamePadState.Triggers.Right <= 0f)
             {
-                Win32.mouse_event((byte)this.RT.KeyCode.Code, Cursor.Position.X, Cursor.Position.Y, 0, 0);
+                MouseLeftDown();
             }
             else if (previousGamePadState.Triggers.Right > 0f && gamePadState.Triggers.Right <= 0f)
             {
-                Win32.mouse_event(this.RT.KeyCodeUp, Cursor.Position.X, Cursor.Position.Y, 0, 0);
+                MouseLeftUp();
                 this.ResetKeys();
             }
 
             // Mouse 2 by LT
             if (gamePadState.Triggers.Left > 0f && previousGamePadState.Triggers.Left <= 0f)
             {
-                Win32.mouse_event((byte)this.LT.KeyCode.Code, Cursor.Position.X, Cursor.Position.Y, 0, 0);
+                MouseRightDown();
             }
             else if (previousGamePadState.Triggers.Left > 0f && gamePadState.Triggers.Left <= 0f)
             {
-                Win32.mouse_event(this.LT.KeyCodeUp, Cursor.Position.X, Cursor.Position.Y, 0, 0);
+                MouseRightUp();
             }
 
             // Mouse Wheel Up by LB
@@ -467,6 +467,82 @@
             mouseInput.dx = (int)mousePosition.X;
             mouseInput.dy = -(int)mousePosition.Y;
             mouseInput.dwFlags = Win32.MOUSEEVENTF.MOVE;
+
+            var inputunion = new Win32.InputUnion();
+            inputunion.mi = mouseInput;
+
+            var input = new Win32.INPUT();
+            input.type = (uint)Win32.InputTypes.INPUT_MOUSE;
+            input.U = inputunion;
+
+            Win32.INPUT[] inputs = { input };
+
+            Win32.SendInput((uint)inputs.Length, inputs, Win32.INPUT.Size);
+        }
+
+        internal void MouseRightDown()
+        {
+            var mouseInput = new Win32.MOUSEINPUT();
+            mouseInput.dwFlags = Win32.MOUSEEVENTF.RIGHTDOWN;
+
+            mouseInput.mouseData = 0;
+
+            var inputunion = new Win32.InputUnion();
+            inputunion.mi = mouseInput;
+
+            var input = new Win32.INPUT();
+            input.type = (uint)Win32.InputTypes.INPUT_MOUSE;
+            input.U = inputunion;
+
+            Win32.INPUT[] inputs = { input };
+
+            Win32.SendInput((uint)inputs.Length, inputs, Win32.INPUT.Size);
+        }
+
+        internal void MouseRightUp()
+        {
+            var mouseInput = new Win32.MOUSEINPUT();
+            mouseInput.dwFlags = Win32.MOUSEEVENTF.RIGHTUP;
+
+            mouseInput.mouseData = 0;
+
+            var inputunion = new Win32.InputUnion();
+            inputunion.mi = mouseInput;
+
+            var input = new Win32.INPUT();
+            input.type = (uint)Win32.InputTypes.INPUT_MOUSE;
+            input.U = inputunion;
+
+            Win32.INPUT[] inputs = { input };
+
+            Win32.SendInput((uint)inputs.Length, inputs, Win32.INPUT.Size);
+        }
+
+        internal void MouseLeftDown()
+        {
+            var mouseInput = new Win32.MOUSEINPUT();
+            mouseInput.dwFlags = Win32.MOUSEEVENTF.LEFTDOWN;
+
+            mouseInput.mouseData = 0;
+            
+            var inputunion = new Win32.InputUnion();
+            inputunion.mi = mouseInput;
+
+            var input = new Win32.INPUT();
+            input.type = (uint)Win32.InputTypes.INPUT_MOUSE;
+            input.U = inputunion;
+
+            Win32.INPUT[] inputs = { input };
+
+            Win32.SendInput((uint)inputs.Length, inputs, Win32.INPUT.Size);
+        }
+
+        internal void MouseLeftUp()
+        {
+            var mouseInput = new Win32.MOUSEINPUT();
+            mouseInput.dwFlags = Win32.MOUSEEVENTF.LEFTUP;
+
+            mouseInput.mouseData = 0;
 
             var inputunion = new Win32.InputUnion();
             inputunion.mi = mouseInput;
