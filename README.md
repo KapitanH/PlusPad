@@ -1,7 +1,7 @@
 # PlusPad
 Simulates keyboard and mouse input with a XBOX 360 gamepad.
 
-Download [+pad](https://github.com/KapitanH/PlusPad/releases/download/v2.1.0/+pad.zip).  
+Download [+pad](https://github.com/KapitanH/PlusPad/releases/download/v2.1.1/+pad.zip).  
 Important: You may need to allow access to the zip or the exe file for it to be extractable and working correctly. (Right click on file, choose 'Properties', and on the bottom there should be an option 'Security' which you have to check.)
 
 For development please install [MonoGame 3.7.1](http://community.monogame.net/t/monogame-3-7-1-release/11173).  
